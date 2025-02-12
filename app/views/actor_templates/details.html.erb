@@ -28,22 +28,24 @@
     <th>Title</th>
     <th>Year</th>
     <th>Director</th>
-    <th>Character Name</th>
+    <th>Character name</th>
     <th></th>
   </tr>
-<!---->
-  <%# @matching_characters.each do |character| %>
-<!--    <tr>
-      movie_id = character.movie_id
 
+  <% @matching_characters.each do |character| %>
+    <tr>
+      <% movie_id = character.movie_id %>
+      <% movie = Movie.all.where({:id => movie_id})[0] %>
 
-      <td><%#= movie.id %></td>
-      <td><img src="<%#= movie.image %>" width="160"></td>
-      <td><%#= movie.title %></td>
-      <td><%#= movie.year %></td>
-      <td><%#= @director.name %></td>
-      <td><a href="/movies/<%#= movie.id %>">Show details</a></td>
+      <td><%= movie.title %></td>
+      <td><%= movie.year %></td>
+
+      <% director = Director.all.where({:id => movie.director_id})[0] %>
+
+      <td><%= director.name %></td>
+      <td><%= character.name %></td>
+      <td><a href="/movies/<%= movie.id %>">Show details</a></td>
     </tr>
-  <%# end %>-->
+  <% end %>
 
 </table>
