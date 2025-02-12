@@ -21,4 +21,11 @@ class DirectorsController < ApplicationController
     render({:template => "director_templates/youngest"})
   end
 
+  def display_eldest
+    directors_by_age = Director.where.not({ :dob => nil }).order({:dob => :desc})
+    @eldest_director = directors_by_age[-1]
+
+    render({:template => "director_templates/eldest"})
+  end
+
 end
